@@ -67,14 +67,25 @@ class Main:
         # -----------------------------------------------------------
         logging.info("+ Genero la columna G#")
         # -----------------------------------------------------------
-        cond = [ # G1
-                 ((df["JOB_FAMILY"].str.upper() == "MANDOS MEDIOS") & ((df["PUESTO"].str.upper().str.contains("SR")) |
-                                                                       (df["PUESTO"].str.upper().str.contains("SENIOR")) |
-                                                                       (df["PUESTO"].str.upper().str.contains("MANAGER")))),
-                 # G2
-                 ((df["JOB_FAMILY"].str.upper() == "GERENTES") & (df["PUESTO"].str.upper().str.contains("DIRECTOR"))),
-                 # G3
-                 ((df["JOB_FAMILY"].str.upper() == "GERENTES") & (df["PUESTO"].str.upper().str.contains("VP"))),
+        # cond = [ # G1
+        #          ((df["JOB_FAMILY"].str.upper() == "MANDOS MEDIOS") & ((df["PUESTO"].str.upper().str.contains("SR")) |
+        #                                                                (df["PUESTO"].str.upper().str.contains("SENIOR")) |
+        #                                                                (df["PUESTO"].str.upper().str.contains("MANAGER")))),
+        #          # G2
+        #          ((df["JOB_FAMILY"].str.upper() == "GERENTES") & (df["PUESTO"].str.upper().str.contains("DIRECTOR"))),
+        #          # G3
+        #          ((df["JOB_FAMILY"].str.upper() == "GERENTES") & (df["PUESTO"].str.upper().str.contains("VP"))),
+        #        ]
+
+        # Nueva definición.
+        cond = [# G1
+                ((df["JOB_FAMILY"].str.upper() == "MANDOS MEDIOS") &
+                    (((df["PUESTO"].str.upper().str.contains("SR")) & (df["PUESTO"].str.upper().str.contains("MANAGER"))) |
+                    ((df["PUESTO"].str.upper().str.contains("SENIOR")) & (df["PUESTO"].str.upper().str.contains("MANAGER"))))),
+                # G2
+                ((df["JOB_FAMILY"].str.upper() == "GERENTES") & (df["PUESTO"].str.upper().str.contains("DIRECTOR"))),
+                # G3
+                ((df["JOB_FAMILY"].str.upper() == "GERENTES") & (df["PUESTO"].str.upper().str.contains("VP"))),
                ]
         result = ["G1", "G2", "G3"]
         df["G#"] = np.select(cond, result, default=None)
