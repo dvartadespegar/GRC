@@ -1,0 +1,733 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>dlgSchedule</class>
+ <widget class="QDialog" name="dlgSchedule">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1329</width>
+    <height>705</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>1329</width>
+    <height>705</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>1329</width>
+    <height>705</height>
+   </size>
+  </property>
+  <property name="contextMenuPolicy">
+   <enum>Qt::NoContextMenu</enum>
+  </property>
+  <property name="windowTitle">
+   <string>Scheduler</string>
+  </property>
+  <property name="modal">
+   <bool>true</bool>
+  </property>
+  <widget class="QPushButton" name="btnSave">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>455</x>
+     <y>644</y>
+     <width>113</width>
+     <height>36</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>9</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Guardar</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnCancel">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>329</x>
+     <y>644</y>
+     <width>113</width>
+     <height>36</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>9</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Cancel</string>
+   </property>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_2">
+   <property name="geometry">
+    <rect>
+     <x>287</x>
+     <y>447</y>
+     <width>295</width>
+     <height>71</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="title">
+    <string>Periodicidad</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_6">
+   <property name="geometry">
+    <rect>
+     <x>302</x>
+     <y>478</y>
+     <width>89</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>9</pointsize>
+     <weight>50</weight>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>Ejecutar cada</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="cboTimeUnit">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>462</x>
+     <y>476</y>
+     <width>106</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>9</pointsize>
+     <weight>50</weight>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="currentText">
+    <string>Mes/es</string>
+   </property>
+   <item>
+    <property name="text">
+     <string>Mes/es</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Semana/s</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Día/s</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Hora/s</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Minuto/s</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QLineEdit" name="txtExecuteEach">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>406</x>
+     <y>476</y>
+     <width>43</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>43</width>
+     <height>16777215</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>9</pointsize>
+     <weight>50</weight>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>0</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>299</x>
+     <y>546</y>
+     <width>100</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>9</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Comenzando el</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_5">
+   <property name="geometry">
+    <rect>
+     <x>299</x>
+     <y>577</y>
+     <width>84</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>9</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Finalizando el</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>126</x>
+     <y>329</y>
+     <width>51</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>9</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Reporte</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="cboReport">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>189</x>
+     <y>329</y>
+     <width>379</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>9</pointsize>
+    </font>
+   </property>
+  </widget>
+  <widget class="QDateTimeEdit" name="dtStart">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>406</x>
+     <y>543</y>
+     <width>160</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>160</width>
+     <height>24</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>9</pointsize>
+    </font>
+   </property>
+   <property name="minimumDate">
+    <date>
+     <year>2020</year>
+     <month>1</month>
+     <day>1</day>
+    </date>
+   </property>
+   <property name="maximumTime">
+    <time>
+     <hour>23</hour>
+     <minute>59</minute>
+     <second>59</second>
+    </time>
+   </property>
+   <property name="minimumTime">
+    <time>
+     <hour>0</hour>
+     <minute>0</minute>
+     <second>0</second>
+    </time>
+   </property>
+   <property name="displayFormat">
+    <string>dd/MM/yyyy hh:mm</string>
+   </property>
+   <property name="calendarPopup">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QDateTimeEdit" name="dtEnd">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>406</x>
+     <y>574</y>
+     <width>160</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>160</width>
+     <height>24</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>9</pointsize>
+    </font>
+   </property>
+   <property name="minimumDate">
+    <date>
+     <year>2020</year>
+     <month>1</month>
+     <day>1</day>
+    </date>
+   </property>
+   <property name="displayFormat">
+    <string>dd/MM/yyyy hh:mm</string>
+   </property>
+   <property name="calendarPopup">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="chkCompleteFlag">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>189</x>
+     <y>364</y>
+     <width>176</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>9</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Completo</string>
+   </property>
+  </widget>
+  <widget class="QRadioButton" name="rbDias">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>126</x>
+     <y>413</y>
+     <width>148</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>En días especificos</string>
+   </property>
+  </widget>
+  <widget class="QRadioButton" name="rbPeriodico">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>301</x>
+     <y>413</y>
+     <width>176</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Periódicamente</string>
+   </property>
+  </widget>
+  <widget class="QTableWidget" name="tblScheduler">
+   <property name="geometry">
+    <rect>
+     <x>14</x>
+     <y>35</y>
+     <width>1303</width>
+     <height>239</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>8</pointsize>
+    </font>
+   </property>
+   <column>
+    <property name="text">
+     <string>Schedule Id</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Report Name</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Complete?</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Enabled</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Execute Each</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Time Unit</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Execute Days</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Start Date</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>End Date</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Next Execution</string>
+    </property>
+   </column>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_3">
+   <property name="geometry">
+    <rect>
+     <x>105</x>
+     <y>294</y>
+     <width>484</width>
+     <height>400</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="title">
+    <string>Nuevo Schedule</string>
+   </property>
+   <widget class="QSplitter" name="splitter">
+    <property name="geometry">
+     <rect>
+      <x>28</x>
+      <y>182</y>
+      <width>120</width>
+      <height>162</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>8</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
+    </property>
+    <widget class="QCheckBox" name="chkD">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Domingo</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="chkL">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Lunes</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="chkM">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Martes</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="chkW">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Miércoles (W)</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="chkJ">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Jueves</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="chkV">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Viernes</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="chkS">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Sábado</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBox">
+    <property name="geometry">
+     <rect>
+      <x>14</x>
+      <y>154</y>
+      <width>155</width>
+      <height>204</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>En días específicos</string>
+    </property>
+   </widget>
+   <zorder>groupBox</zorder>
+   <zorder>splitter</zorder>
+  </widget>
+  <widget class="QPushButton" name="btnExit">
+   <property name="geometry">
+    <rect>
+     <x>1204</x>
+     <y>287</y>
+     <width>113</width>
+     <height>36</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>9</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Salir</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnNew">
+   <property name="geometry">
+    <rect>
+     <x>1057</x>
+     <y>287</y>
+     <width>141</width>
+     <height>36</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>9</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Nuevo Schedule</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>14</x>
+     <y>14</y>
+     <width>204</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>9</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>Schedules activos:</string>
+   </property>
+  </widget>
+  <zorder>groupBox_2</zorder>
+  <zorder>groupBox_3</zorder>
+  <zorder>label_6</zorder>
+  <zorder>cboTimeUnit</zorder>
+  <zorder>txtExecuteEach</zorder>
+  <zorder>label_4</zorder>
+  <zorder>label_5</zorder>
+  <zorder>label</zorder>
+  <zorder>btnSave</zorder>
+  <zorder>btnCancel</zorder>
+  <zorder>dtStart</zorder>
+  <zorder>dtEnd</zorder>
+  <zorder>tblScheduler</zorder>
+  <zorder>btnExit</zorder>
+  <zorder>btnNew</zorder>
+  <zorder>cboReport</zorder>
+  <zorder>chkCompleteFlag</zorder>
+  <zorder>rbDias</zorder>
+  <zorder>rbPeriodico</zorder>
+  <zorder>label_2</zorder>
+ </widget>
+ <tabstops>
+  <tabstop>tblScheduler</tabstop>
+  <tabstop>btnExit</tabstop>
+  <tabstop>btnNew</tabstop>
+  <tabstop>cboReport</tabstop>
+  <tabstop>chkCompleteFlag</tabstop>
+  <tabstop>rbDias</tabstop>
+  <tabstop>rbPeriodico</tabstop>
+  <tabstop>chkD</tabstop>
+  <tabstop>chkL</tabstop>
+  <tabstop>chkM</tabstop>
+  <tabstop>chkW</tabstop>
+  <tabstop>chkJ</tabstop>
+  <tabstop>chkV</tabstop>
+  <tabstop>chkS</tabstop>
+  <tabstop>txtExecuteEach</tabstop>
+  <tabstop>cboTimeUnit</tabstop>
+  <tabstop>dtStart</tabstop>
+  <tabstop>dtEnd</tabstop>
+  <tabstop>btnSave</tabstop>
+  <tabstop>btnCancel</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>
