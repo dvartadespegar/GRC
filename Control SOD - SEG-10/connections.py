@@ -6,18 +6,18 @@ import mysql.connector      # se debe instalar con esto: pip install mysql-conne
 import funcs as f
 
 
-def get_SOD():
-    logging.info("+ Recupero datos de la planilla")
+def get_SOD(filename):
+    logging.info("  + Load SOX Matrix")
 
-    sod_filename = 'Updates matriz SOD v.11.xlsx'
+    sod_filename = filename #'Updates matriz SOD v.11.xlsx'
     df_sod_comb = pd.read_excel(sod_filename, sheet_name="Combinaciones")
     df_sod_resp = pd.read_excel(sod_filename, sheet_name="RolesxFuncion")
 
     print(" "); print("df_sod_comb (combinaciones - original):"); print(df_sod_comb)
     print(" "); print("df_sod_resp (roles x función):"); print(df_sod_resp)
-    logging.info("- Recupero datos de la planilla")
+    logging.info("  - Load SOX Matrix")
 
-    logging.info("  + Cambio los nombres de la fila de cabecera con los datos de la 1a fila")
+    print("  + Cambio los nombres de la fila de cabecera con los datos de la 1a fila")
     cols = []
     for i in range(0, len(df_sod_comb.columns)):
         if pd.isna(df_sod_comb.iloc[0, i]):
@@ -26,29 +26,19 @@ def get_SOD():
             cols.append(df_sod_comb.iloc[0, i])
     # print(cols)
     df_sod_comb.columns = cols
-    logging.info("  - Cambio los nombres de la fila de cabecera con los datos de la 1a fila")
+    print("  - Cambio los nombres de la fila de cabecera con los datos de la 1a fila")
 
-    logging.info("  + Borro la 1a fila y la 1a columna")
+    print("  + Borro la 1a fila y la 1a columna")
     df_sod_comb.drop([0], axis=0, inplace=True)                 # fila
     df_sod_comb.drop("COL-0", axis=1, inplace=True)             # columna (tiene que ir el nombre de la columna)
     df_sod_comb.rename(columns={"ID": "FUNC", "COL-1": "COD"}, inplace=True)
     print(" "); print("df_sod_comb (final)"); print(df_sod_comb)
-    logging.info("  - Borro la 1a fila y la 1a columna")
-
-
-    # print(" "); print("df_sod_comb: "); print(df_sod_comb)
-    # f.quick_excel(df_sod_comb, "Rep_SOD_Comb")
-    # print(" "); print("df_sod_resp: "); print(df_sod_resp)
-    # f.quick_excel(df_sod_resp, "Rep_SOD_Resp")
-    # print(" "); print("df_sod_comb.columns: "); print(df_sod_comb.columns)
-
-    # Si activo esto el proceso pincha en la batidora.
-    # print("  + df_sod_resp: dejo sólo la respos de Oracle")
-    # df_sod_resp = df_sod_resp[df_sod_resp["Aplicación"] == "Oracle"]
-    # print("  - df_sod_resp: dejo sólo la respos de Oracle")
+    print("  - Borro la 1a fila y la 1a columna")
 
     # Toma de df_sod_comb donde están las "x" y va a buscar las respos que corresponden a esa combinación.
-    logging.info("  + Batidora")
+    # ------------------------------------------------------------------------------------------
+    logging.info("  + Blender Process: multiply each combination with its associated roles")
+    # ------------------------------------------------------------------------------------------
     res = []
     for i in range(0, len(df_sod_comb.index)):
         # print("i = ", str(i), " - ") #, df_sod_comb.loc[i,"ID"])
@@ -57,16 +47,18 @@ def get_SOD():
             # print("  j = ", str(j), " - ") #, df_sod_comb.loc[j,"FUNC"] )
             if df_sod_comb.iloc[i, j] == "x":
                 # logging.debug("combinación: (" + str(i) + "," + str(j) + ") - " + df_sod_comb.loc[i, "COD"])
-                print("combinación: (", str(i), ",", str(j), ")") #, df_sod_comb.loc[i, "COD"])
-                r = int(df_sod_comb.iloc[i, 0])      # traigo el código de fila que tengo que ir a buscar a df_sod_resp
-                c = int(df_sod_comb.columns[j])      # traigo el código de columna que tengo que ir a buscar a df_sod_resp
+                # print("combinación: (", str(i), ",", str(j), ")") #, df_sod_comb.loc[i, "COD"])
+                print("combinación: (", df_sod_comb.iloc[i, 0], ",", df_sod_comb.columns[j], ")") #, df_sod_comb.loc[i, "COD"])
+                r = df_sod_comb.iloc[i, 0]      # traigo el código de fila que tengo que ir a buscar a df_sod_resp
+                c = df_sod_comb.columns[j]      # traigo el código de columna que tengo que ir a buscar a df_sod_resp
                 #logging.debug("r = " + str(r) + "; c = " + str(c))
-                # print("  r = ", str(r), "; c = " + str(c))
+                #print("  r = ", str(r), "; c = " + str(c))
 
                 df1 = df_sod_resp[df_sod_resp.loc[:,"COD"] == r]    # traigo todas las respos del código de la fila
                 df2 = df_sod_resp[df_sod_resp.loc[:,"COD"] == c]    # traigo todas las respos del códido de la columna
                 # print("df1 (r): (cant.reg. = ", str(len(df1.index)) + ")"); print(df1)
                 # print("df2 (c): (cant.reg. = ", str(len(df2.index)) + ")"); print(df2)
+                print("df1 (r) = ", df1.shape, "; df2 (c) = ", df2.shape)
 
                 k = 0
                 for x in range(0, len(df1.index)):
@@ -85,13 +77,13 @@ def get_SOD():
                         # print(lista)
                         k += 1
                 print("Se insertaron ", str(k), " registros en 'res'")
-    logging.info("  - Batidora")
 
     df_res = pd.DataFrame(res, columns=["MOD_A", "RESP_A", "MOD_B", "RESP_B", "APLIC_A", "APLIC_B", "COMBINACION"])  # .fillna("")
     print(" "); print("df_res (original): "); print(df_res)
+    logging.info("  - Blender Process: multiply each combination with its associated roles; " + str(df_res.shape))
 
     # --------------------------------------------------------------------------------
-    logging.info("  + Borro filas vacías y las incompatibilidades consigo mismo")
+    logging.info("  + Cleaning empty rows and incompatibilities with itself")
     # --------------------------------------------------------------------------------
     df_res.drop(df_res[df_res["RESP_A"] == df_res["RESP_B"]].index, inplace=True)
 
@@ -103,11 +95,19 @@ def get_SOD():
     df_res["APLIC_A"] = df_res["APLIC_A"].str.upper()
     df_res["APLIC_B"] = df_res["APLIC_B"].str.upper()
 
-    logging.info("  - Borro filas vacías y las incompatibilidades consigo mismo")
-
     df_res.rename(columns={"MOD_A": "MODULE_NAME", "RESP_A": "ROLE_NAME", "MOD_B": "INCOMP_MODULE_NAME", "RESP_B": "INCOMP_ROLE_NAME",
                            "APLIC_A": "APPL_NAME", "APLIC_B": "APPL_INCOMP_NAME", "COMBINACION": "COMBINATION"}, inplace=True)
     print(" "); print("df_res (final): "); print(df_res)
+    logging.info("  - Cleaning empty rows and incompatibilities with itself; " + str(df_res.shape))
+
+    # -----------------------------------------------------------
+    print("  + Filtering Oracle, ATP1 & ATP3")
+    # -----------------------------------------------------------
+    df_res["APPL_NAME"] = df_res["APPL_NAME"].apply(lambda x: x if x == "ATP1" or x == "ATP3" or x == "ORACLE" else "BORRAR")
+    df_res["APPL_INCOMP_NAME"] = df_res["APPL_INCOMP_NAME"].apply(lambda x: x if x == "ATP1" or x == "ATP3" or x == "ORACLE" else "BORRAR")
+    df_res.drop(df_res[df_res["APPL_NAME"] == "BORRAR"].index, inplace=True)
+    df_res.drop(df_res[df_res["APPL_INCOMP_NAME"] == "BORRAR"].index, inplace=True)
+    print("  - Filtering Oracle, ATP1 & ATP3; " + str(df_res.shape))
 
     return df_res
 
