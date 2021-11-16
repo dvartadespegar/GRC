@@ -7,6 +7,7 @@ import base64
 import numpy as np
 
 
+
 def quick_excel(df, title, extension="xlsx"):
     print("+ quick_excel")
     filename = title + "_" + datetime.now().strftime("%Y%m%d_%H%M%S")
